@@ -2,11 +2,12 @@ import React from "react";
 
 import axios from "axios";
 
-import "./App.css";
 import SnippetOverview from "./components/SnippetOverview";
-import FormComponent from "./components/common/form/FormComponent";
-import { formConfig } from "./configs";
 import ChatComponent from "./components/ChatComponent";
+
+import "./css/App.css";
+import "./css/chat_component.css";
+import "./css/form_component.css";
 
 function App() {
   const handleGetFolders = () => {

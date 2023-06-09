@@ -1,4 +1,4 @@
-export const formConfig = {
+export const exampleFormConfig = {
   formName: "userForm",
   formFields: [
     {
@@ -100,9 +100,32 @@ export const formConfig = {
     {
       type: "button",
       label: "Submit",
-      onClick: () => {
-        // Handle form submission logic here
+      onClick: "handleSubmit",
+    },
+  ],
+};
+
+export const chatFormConfig = {
+  formName: "chatForm",
+  formFields: [
+    {
+      type: "textArea",
+      name: "prompt",
+      label: "Prompt",
+      placeholder: "Enter your prompt",
+      initialValue: "Some value",
+      onChange: "handlePromptChange",
+      field_validation: {
+        required: true,
       },
+    },
+    {
+      type: "textArea",
+      name: "response",
+      label: "Response",
+      placeholder: "Enter your response",
+      onChange: "handleResponseChange",
+      readOnly: true,
     },
   ],
 };

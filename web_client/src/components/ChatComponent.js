@@ -1,49 +1,42 @@
 import React, { useState } from "react";
 
 import FormComponent from "./common/form/FormComponent";
-import { formConfig } from "../configs";
+import { chatFormConfig } from "../configs";
 
 const ChatComponent = () => {
-  const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
+  // TODO on component mount we may want to wait with rendering the form
+  // until we have the data (porential) initial values. Which may require
+  // a request to the backend.
+  const [formValues, setFieldValues] = useState(
+    chatFormConfig.formFields.reduce(
+      (values, field) => ({
+        ...values,
+        [field.name]: field.initialValue || "",
+      }),
+      {}
+    )
+  );
+  const [formErrors, setFormErrors] = useState({});
 
-  const handleFirstNameChange = (event) => {
-    console.log(event.target.value);
+  const setFieldValue = (name, value) => {
+    setFieldValues((prev) => ({ ...prev, [name]: value }));
   };
-
-  const handleLastNameChange = (event) => {
-    console.log(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    console.log(event.target.value);
-  };
-
-  const handleGenderChange = (event) => {
-    console.log(event.target.value);
-  };
-
-  const handleHobbiesChange = (event) => {
-    console.log(event.target.value);
-  };
-
-  const handleNewsletterChange = (event) => {
-    console.log(event.target.value);
+  const handlePromptChange = (event) => {
+    const { name, value } = event.target;
+    console.log("name", name, "value", value);
+    setFieldValue(name, value);
   };
 
   return (
-    <div>
+    <div className="chat-component-container">
       <h1>Main chat</h1>
       <FormComponent
-        formConfig={formConfig}
+        formConfig={chatFormConfig}
         changeHandlers={{
-          handleFirstNameChange,
-          handleLastNameChange,
-          handleEmailChange,
-          handleGenderChange,
-          handleHobbiesChange,
-          handleNewsletterChange,
+          handlePromptChange,
         }}
+        values={formValues}
+        errors={formErrors}
       />
     </div>
   );
